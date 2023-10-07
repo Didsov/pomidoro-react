@@ -1,0 +1,16 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    padding-right: 16px;
+    max-width: 33vw;
+}
+.title{
+    margin: 3px;
+}
+.ins{
+    margin: 0;
+    padding-left: 23px;
+}
+.ins>li::marker{
+    color: #B7280F;
+}
