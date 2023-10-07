@@ -1,17 +1,17 @@
 
-import React from "react";
 import { Wrapper } from "../Wrapper/Wrapper";
 import styles from  './Main.module.css'
+import { TextBlock } from "./TextBlock/TextBlock";
+import { TimerBlock } from "./TimerBlock/TimerBlock";
 
 
-interface Main{
-    children?: React.ReactNode;
-}
-export function Main({children}:Main){
+
+export function Main(){
     return (
         <Wrapper>
             <div className={styles.main}>
-                {children}
+                <TextBlock/>
+                <TimerBlock/>
             </div>
         </Wrapper>
     )

@@ -1,14 +1,15 @@
 
 import React from "react";
-import styles from  './Stats.module.css'
+import styles from  './StatsLink.module.css';
+import {Link } from 'react-router-dom';
 import { StatsSvg } from "../../../../SVG/StatsSvg";
 
 
-export function Stats(){
+export function StatsLink(){
     return (
-        <a href="#" className={styles.container}>
+        <Link to='/stats' className={styles.container}>
             <StatsSvg/>
             <p className={styles.title}>Статистика</p>
-        </a>
+        </Link>
     )
 }

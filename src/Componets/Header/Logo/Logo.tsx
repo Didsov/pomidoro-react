@@ -1,6 +1,6 @@
 
-import React from "react";
-import styles from  './Logo.module.css'
+import {Link } from 'react-router-dom';
+import styles from  './Logo.module.css';
 import { LogoSvg } from "../../../SVG/LogoSvg";
 
 interface Logo{
@@ -8,12 +8,9 @@ interface Logo{
 }
 export function Logo(){
     return (
-        <a className={styles.container} href="#logo">
+        <Link to='/' className={styles.container}>
             <LogoSvg/>
             <p className={styles.logoTitle}>pomodoro_box</p>
-
-
-            
-        </a>
+        </Link>
     )
 }

@@ -1,5 +1,4 @@
 
-import React from "react";
 import styles from  './TimerBlock.module.css'
 import { Clock } from "./Clock/Clock";
 import { Button } from "../../Button/Button";
