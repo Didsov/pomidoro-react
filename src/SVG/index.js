@@ -6,3 +6,8 @@ export * from  './MinusSvg';
 export * from  './PlusSvg';
 export * from  './RedactSvg';
 export * from  './AddSvg';
+export * from  './ArrowSvg';
+export * from  './FocusSvg';
+export * from  './PauseSvg';
+export * from  './StopSvg';
+export * from  './TomatoSvg';

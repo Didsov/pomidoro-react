@@ -1,1 +1,1 @@
-export * from './CMP';
+export * from './Stats';

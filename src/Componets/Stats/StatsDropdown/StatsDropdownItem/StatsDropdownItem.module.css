@@ -1,0 +1,14 @@
+.btn{
+    display: flex;
+    justify-content: start;
+    width: 100%;
+    flex: 1;
+    background: #F4F4F4;
+    padding: 19px 15px;
+    position: relative;
+
+}
+
+.btn:hover{
+    background: #ECECEC;
+}

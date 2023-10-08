@@ -1,0 +1,21 @@
+.day{
+    width: 77px;
+    height: 5px;
+    background: #E2E2E2;
+    position: relative;
+    z-index: 1;
+}
+
+.dayName{
+    font-size: 24px;
+    color: #999999;
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+
+.today{
+    color: #DC3E22;
+}
