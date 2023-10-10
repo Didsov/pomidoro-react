@@ -7,14 +7,16 @@ import { DropdownSvg } from "../../../../../SVG/DropdownSvg";
 
 interface ITask{
     tomatoCounter: number;
-    children?: React.ReactNode;
+    name: React.ReactNode;
+    id: number;
 }
-export function Task({children, tomatoCounter =1}:ITask){
+export function Task({name, tomatoCounter, id}:ITask){
+        
     return (
         <li className={styles.container}>
             <span className={styles.counter}>{tomatoCounter}</span>
-            <span className={styles.taskName}> {children} </span>
-            <TaskDropdown/>
+            <span className={styles.taskName}> {name} </span>
+            <TaskDropdown id={id}/>
             
             
         </li>

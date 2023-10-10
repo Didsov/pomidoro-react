@@ -25,3 +25,11 @@
     align-items: center;
     margin-right: 8px;
 }
+
+.disabled * {
+    color:#999999;
+    fill: #C4C4C4;
+}
+.disabled:hover{
+    background: none;
+}

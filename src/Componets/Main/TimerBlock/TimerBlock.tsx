@@ -2,8 +2,7 @@
 import styles from  './TimerBlock.module.css'
 import { Clock } from "./Clock/Clock";
 import { Button } from "../../Button/Button";
-import { useStore } from 'effector-react';
-import { $storeTimer } from '../../../effector/init';
+
 
 
 
