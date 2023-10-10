@@ -13,9 +13,10 @@ import { useStore } from "effector-react/compat";
 
 interface ITaskDropdown{
     id: number;
+    edit: ()=>void;
 }
 
-export function TaskDropdown({id}:ITaskDropdown){
+export function TaskDropdown({id, edit}:ITaskDropdown){
     const task = useStore($TaskList).list.filter(task=>task.key === id)[0];
 
     const [isOpen, setIsOpen] = useState(false)
@@ -39,6 +40,11 @@ export function TaskDropdown({id}:ITaskDropdown){
         deleteTask(task.key);
         handleClose();
     }
+    function handleEdit(){
+        edit()
+        handleClose()
+    }
+    
 
     useEffect(()=>{
         function handleClick(event: MouseEvent){
@@ -62,7 +68,7 @@ export function TaskDropdown({id}:ITaskDropdown){
         {isOpen&&<ul className={styles.DropdownList}>
             <TaskDropdownItem onClick={handleAdd} icon= {<PlusSvg/>}>Увеличить</TaskDropdownItem>
             <TaskDropdownItem onClick={handleMinus} isDisabled={task.tomatos<=1} icon= {<MinusSvg/>}>Уменьшить</TaskDropdownItem>
-            <TaskDropdownItem onClick={handleClose} icon= {<RedactSvg/>}>Редактировать</TaskDropdownItem>
+            <TaskDropdownItem onClick={handleEdit} icon= {<RedactSvg/>}>Редактировать</TaskDropdownItem>
             <TaskDropdownItem onClick={handleDelete} icon= {<DeleteSvg/>}>Удалить</TaskDropdownItem>
         </ul>}
     </div>

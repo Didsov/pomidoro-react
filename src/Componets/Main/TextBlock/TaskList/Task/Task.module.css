@@ -15,12 +15,26 @@
     align-items: center;
     width: 370px;
 }
+.nameContainer{
+    display: flex;
+    flex: 1;
+    width: 100%;
+}
 .taskName{
     color: #333333;
     line-height: 17px;
     font-weight: 300;
-    flex: 1;
-    
+    border: none;
+    padding: 4px 5px;
+}
+
+.editable{
+    background: #F4F4F4;
+
+}
+.taskName:focus{
+    border: none;
+    outline: none;
 }
 .container::after, .container::before{
     content: '';

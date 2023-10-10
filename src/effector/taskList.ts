@@ -16,6 +16,7 @@ export const addTask = createEvent();
 export const setNewTask = createEvent<string>();
 export const changeTomatos = createEvent<{id: number, change: number}>();
 export const deleteTask = createEvent<number>();
+export const editTask = createEvent<{id: number, newName: string}>();
 
 export const $TaskList = createStore<ITaskList>({list: [], newTask: ''})
     .on(setNewTask, (store, newTask)=> ({
@@ -40,5 +41,11 @@ export const $TaskList = createStore<ITaskList>({list: [], newTask: ''})
     })).on(deleteTask, (store, id) => ({
         ...store,
         list: store.list.filter(task=>task.key != id),
+    })).on(editTask, (store, {id, newName}) => ({
+        ...store,
+        list: store.list.map(task=>({
+            ...task,
+            name: task.key === id? newName: task.name,
+        }))
     }))
     

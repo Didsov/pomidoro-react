@@ -32,7 +32,7 @@ export function TaskList(){
             <ul className={styles.list}>
                 {
                    list.list.map( (task) =>(
-                    <Task name={task.name} tomatoCounter={task.tomatos} id={task.key} key={task.key}/>
+                    <Task  id={task.key} key={task.key}/>
                    ) )
                 }
                 
