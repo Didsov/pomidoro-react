@@ -2,6 +2,8 @@
 import styles from  './TimerBlock.module.css'
 import { Clock } from "./Clock/Clock";
 import { Button } from "../../Button/Button";
+import { useStore } from 'effector-react';
+import { $storeTimer } from '../../../effector/init';
 
 
 
@@ -13,7 +15,8 @@ export function TimerBlock(){
                 <p className={styles.counter}>Помидор 1</p>
             </div>
             <div className={styles.main}>
-            <Clock>18:00</Clock>
+
+            <Clock/>
             <p className={styles.task}>
                 <span className={styles.taskNumber} > Задача 1 - </span> <span className={styles.taskName}>Сверстать сайт</span>
             </p>

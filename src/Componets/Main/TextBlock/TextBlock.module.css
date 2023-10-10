@@ -10,6 +10,7 @@
 .ins{
     margin: 0;
     padding-left: 23px;
+    font-weight: 300;
 }
 .ins>li::marker{
     color: #B7280F;
