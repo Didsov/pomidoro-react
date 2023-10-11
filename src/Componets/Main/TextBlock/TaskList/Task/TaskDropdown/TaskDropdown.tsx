@@ -9,6 +9,8 @@ import { RedactSvg } from "../../../../../../SVG/RedactSvg";
 import { DeleteSvg } from "../../../../../../SVG/DeleteSvg";
 import { $TaskList, ITask, changeTomatos, deleteTask } from "../../../../../../effector/taskList";
 import { useStore } from "effector-react/compat";
+import { createPortal } from "react-dom";
+import { DeleteAccept } from "../DeleteAccept/DeleteAccept";
 
 
 interface ITaskDropdown{
@@ -18,6 +20,7 @@ interface ITaskDropdown{
 
 export function TaskDropdown({id, edit}:ITaskDropdown){
     const task = useStore($TaskList).list.filter(task=>task.key === id)[0];
+    const [showModal, setShowModal] = useState(false);
 
     const [isOpen, setIsOpen] = useState(false)
     const ref = useRef<HTMLDivElement>(null);
@@ -38,7 +41,14 @@ export function TaskDropdown({id, edit}:ITaskDropdown){
     }
     function handleDelete(){
         deleteTask(task.key);
+        
+    }
+    function handleShowModal(){
+        setShowModal(true);
         handleClose();
+    }
+    function handeCloseModal(){
+        setShowModal(false);
     }
     function handleEdit(){
         edit()
@@ -61,7 +71,8 @@ export function TaskDropdown({id, edit}:ITaskDropdown){
    
 
     return (
-       <div className={styles.container} ref = {ref}>
+    <>
+    <div className={styles.container} ref = {ref}>
 
         <button className={styles.btn} onClick={handleClick} > <DropdownSvg/> </button>
 
@@ -69,8 +80,15 @@ export function TaskDropdown({id, edit}:ITaskDropdown){
             <TaskDropdownItem onClick={handleAdd} icon= {<PlusSvg/>}>Увеличить</TaskDropdownItem>
             <TaskDropdownItem onClick={handleMinus} isDisabled={task.tomatos<=1} icon= {<MinusSvg/>}>Уменьшить</TaskDropdownItem>
             <TaskDropdownItem onClick={handleEdit} icon= {<RedactSvg/>}>Редактировать</TaskDropdownItem>
-            <TaskDropdownItem onClick={handleDelete} icon= {<DeleteSvg/>}>Удалить</TaskDropdownItem>
+            <TaskDropdownItem onClick={handleShowModal} icon= {<DeleteSvg/>}>Удалить</TaskDropdownItem>
         </ul>}
+
+
     </div>
+        {showModal && createPortal(
+            <DeleteAccept handleClose={handeCloseModal} handleDelete={handleDelete}/>,
+            document.body
+        ) }
+    </>
     )
 }

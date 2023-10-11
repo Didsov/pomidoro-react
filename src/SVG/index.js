@@ -11,3 +11,4 @@ export * from  './FocusSvg';
 export * from  './PauseSvg';
 export * from  './StopSvg';
 export * from  './TomatoSvg';
+export * from  './CroosCloseSvg';
