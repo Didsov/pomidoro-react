@@ -19,7 +19,6 @@
     justify-content: space-between;
     width: 100%;
     padding: 10px 20px;
-    background: #C4C4C4;
     line-height: 17px;
     color: #fff;
 
@@ -46,4 +45,15 @@
 }
 .control>*{
     margin: 0 12.5px;
+}
+
+.work{
+    background: #DC3E22;
+}
+.rest{
+    background: #A8B64F;
+}
+.stop{
+    background: #C4C4C4;
+
 }
