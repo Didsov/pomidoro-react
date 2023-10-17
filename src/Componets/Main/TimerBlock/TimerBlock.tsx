@@ -6,6 +6,7 @@ import { useStore } from 'effector-react/compat';
 import { $TaskList, ITask, addTask, completeTomato, deleteTask, setNewTask } from '../../../effector/taskList';
 import { $storeTimer, changeIsModeWork, changeIsPause, endCycle, startCycle } from '../../../effector/timer';
 import classNames from 'classnames';
+import { addStop, addTomatos, getNow } from '../../../effector/history';
 
 
 
@@ -26,6 +27,7 @@ export function TimerBlock(){
     }
     function handleEnd(){
         endCycle();
+        addStop(getNow());
     }
     function handlePause(){
         changeIsPause(true);
@@ -35,18 +37,18 @@ export function TimerBlock(){
     }
     function handleSkipRest(){
         changeIsModeWork(!timer.isModeWork);
-        completeTomato(key);
         endCycle();
     }
     function handleComplete(){
         deleteTask(key);
+        addTomatos(getNow());
         endCycle();
 
     }
-    console.log(completeTomatos );
     
     return (
         <div className={styles.container}>
+            <></>
             <div className={classNames( styles.header, {[styles.work]: timer.isModeWork, [styles.rest]: !timer.isModeWork, [styles.stop]: !timer.isInProcess})}>
                 <p className={styles.taskHead}>{name}</p>
                 <p className={styles.counter}>Помидор {completeTomatos + 1}</p>

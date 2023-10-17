@@ -3,6 +3,7 @@ import React from "react";
 import styles from  './TomatoCounter.module.css'
 import { LogoSvg } from "../../../SVG/LogoSvg";
 import { TomatoSvg } from "../../../SVG/TomatoSvg";
+import { declOfNum } from "../Stats";
 
 
 interface TomatoCounter{
@@ -11,7 +12,7 @@ interface TomatoCounter{
 export function TomatoCounter({count}:TomatoCounter){
     const isNoTomato = count == 0;
     const wordEnd = 'а';
-    const counterText = count + ' помидор' + wordEnd;
+    const counterText = count + ' ' +  declOfNum(count, ['помидор', 'помидора', 'помидоров']);
 
     return (
         <div className={styles.container} >

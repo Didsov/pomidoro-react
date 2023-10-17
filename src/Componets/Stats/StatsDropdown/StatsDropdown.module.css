@@ -5,6 +5,7 @@
     width: 100%;
     position: relative;
 
+
 }
 .arrow{
     position: absolute;
@@ -30,6 +31,7 @@
     max-width: 370px;
     width: 100%;
     box-shadow: -15px 15px 100px rgba(0, 0, 0, 0.1);
+    z-index: 2;
 
 }
 .dropDown>*::after{

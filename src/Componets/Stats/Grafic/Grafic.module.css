@@ -20,7 +20,7 @@
     position: absolute;
     right: -1%;
     font-weight: 400;
-    transform: translateX(100%);
+    transform: translateX(100%) translateY(-10px);
     color: #333333;
     width: 100%;
     font-size: 12px;
@@ -45,7 +45,7 @@
     display: block;
     left: -32px;
     top: 50%;
-    transform: translateY(50%) translateX(-100%);
+    transform: translateY(50%)  translateX(-100%);
     z-index: -1;
     height: 1px;
     width: 100%;
@@ -55,4 +55,4 @@
     background: #ECECEC;
     height: 50px;
     width: 100%;
-}
+    }

@@ -50,21 +50,27 @@ export const $TaskList = createStore<ITaskList>({list: [], newTask: ''})
             ...task,
             name: task.key === id? newName: task.name,
         }))
-    })).on(completeTomato, (store, id)=>({
-        ...store,
-        list: store.list.filter(task=>{
-            let condition = task.key === id && task.tomatos <= 1;
-            return !condition;
-        }).map(task=>({
-            ...task,
-            completeTomatos: task.key === id? task.completeTomatos +1: task.completeTomatos,
-            tomatos: task.key === id? task.tomatos -1: task.tomatos,
-            
-        }))
-        
+    })).on(completeTomato, (store, id)=>{
+                
+                return(
+                    {
+                    ...store,
+                    list: store.list.filter(task=>{
+                        let condition = task.key === id && task.tomatos <= 1;
+                        return !condition;
+                    }).map(task=>({
+                        ...task,
+                        completeTomatos: task.key === id? task.completeTomatos +1: task.completeTomatos,
+                        tomatos: task.key === id? task.tomatos -1: task.tomatos,
+                    
+                    }))
+                
+                
 
-            
-        
-        
-    }))
+                
+                
+                }
+            )
+        }
+    )
     

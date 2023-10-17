@@ -1,23 +1,100 @@
 
-import React from "react";
+import React, { useState } from "react";
 import styles from  './Grafic.module.css'
 import { Day } from "./Day/Day";
 import classNames from "classnames";
+import { useStore } from "effector-react/compat";
+import { $history, getNow, parseDate } from "../../../effector/history";
+import { $stats, setActiveDay } from "../../../effector/stats";
 
 
 interface IGrafic{
 }
+
+
+const testweek= [
+    {
+        date: getNow(-3),
+        pauseTime: 15,
+        workTime: 45,
+        tomatos: 2,
+    },
+    {
+        date: getNow(-2),
+        pauseTime: 0,
+        workTime: 40,
+        tomatos: 1,
+    },
+    {
+        date: getNow(-1),
+        pauseTime: 15,
+        workTime: 115,
+        tomatos: 4,
+    },{
+        date: getNow(0),
+        pauseTime: 0,
+        workTime: 25,
+        tomatos: 0,
+    },
+    {
+        date: getNow(1),
+        pauseTime: 1,
+        workTime: 50,
+        tomatos: 5,
+    },
+    {
+        date: getNow(2),
+        pauseTime: 10,
+        workTime: 75,
+        tomatos: 5,
+    },
+    {
+        date: getNow(3),
+        pauseTime: 0,
+        workTime: 100,
+        tomatos: 0,
+    }
+]
+
 export function Grafic({}:IGrafic){
+    const NOW  = getNow() ;
+    const week = useStore($stats).week;
+    const history = useStore($history);
+    const stats = useStore($stats);
+    const dayList = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+    let list = dayList.map((day, index)=>{
+        let i = index === 0? 1: 0; // переносим начало недли с воскресенья на понедельник;
+        const date = new Date(NOW.getFullYear(), NOW.getMonth(), NOW.getDate() - NOW.getDay() + index -7*(week - i));
+        return ({
+        date: date,
+        dayName: day,
+        minutes: parseDate(date, history.days).workTime,
+        isActive: stats.active.date.getDay() === index,
+        })
+    });
+    
+
+    let buff = list.shift();
+    if(buff != undefined){
+        list.push( buff );
+
+    }
+
+
+
+
+   
     return (
         <div className={styles.container}>
             <div className={styles.week}>
-                <Day minutes={50} isActive = {false}> Пн </Day>
-                <Day minutes={25} isActive = {true}> Вт </Day>
-                <Day minutes={37} isActive = {false}> Ср </Day>
-                <Day minutes={150} isActive = {false}> Чт </Day>
-                <Day minutes={0.5} isActive = {false}> Пт </Day>
-                <Day minutes={200} isActive = {false}> Сб </Day>
-                <Day minutes={100} isActive = {false}> Вс </Day>
+                
+                   
+                {
+                    list.map(day=>(
+                        <Day minutes={day.minutes/60000} onClick={()=>{setActiveDay(parseDate(day.date,history.days) )}} isActive={day.isActive} key={Number(day.date)}>{day.dayName}</Day>
+                    ))
+                }
+                    
                 <span className={classNames(styles.layout, styles.first)} id={'1'}>25 мин</span>
                 <span className={classNames(styles.layout, styles.second)} id={'2'}>50 мин</span>
                 <span className={classNames(styles.layout, styles.third)} id={'3'}>1ч 15 мин</span>

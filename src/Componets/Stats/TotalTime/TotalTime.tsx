@@ -10,7 +10,7 @@ interface TotalTime{
 }
 export function TotalTime({today, time}:TotalTime){
     let isNotData = false;
-    today = today? today: 'Сегодня';
+    today = today? today: 'В этот день';
     time? time: isNotData = true;
     return (
         <div className={styles.container}>

@@ -8,29 +8,34 @@ interface IDay{
     minutes?: number;
     isActive?: boolean;
     children: React.ReactNode;
+    onClick?: ()=>void;
 }
 
-const MAX = 205;
-export function Day({minutes, isActive, children}:IDay){
+const MAX = 125;
+export function Day({minutes, isActive, children, onClick}:IDay){
     minutes = minutes?minutes:0;
     isActive = isActive?isActive:false;
     let height = minutes / MAX * 100; 
-    let disable = false;
-    const color = isActive? '#DC3E22': '#EA8979';
-    if(height > 100 ){
-        height = 100;
-    }
-    if (height < 1){
-        disable = true;
-    }
-    const H = {
-        'background' : color,
+    let isDisable = false;
+    let heighCSS = {
         'height' : height + '%',
     }
 
+    if(height > 100 ){
+        heighCSS = {
+            'height' : '100%',
+        }
+    }
+    if (height < 1){
+        heighCSS = {
+            'height' : '5px',
+        }
+        isDisable = true;
+    }
+    
 
     return (
-        <div className={classNames(styles.day)} style={disable?{}:H} >
+        <div className={classNames(styles.day, {[styles.active]: isActive}, {[styles.disable]: isDisable})} style={heighCSS} onClick={onClick}>
             <div className={classNames(styles.dayName, {[styles.today]: isActive})}>{children}</div>
         </div>
     )

@@ -20,9 +20,9 @@ export interface ITimer{
 }
 
 const initTimer:ITimer = {
-    curSec: 10,
-    workTime: 10,
-    restTime: 15,
+    curSec: 1500,
+    workTime: 1500,
+    restTime: 300,
     isPause: true,
     isInProcess: false,
     isModeWork: true,
