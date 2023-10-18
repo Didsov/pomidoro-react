@@ -3,7 +3,7 @@ import React, {useEffect, useRef} from "react";
 import styles from  './Clock.module.css'
 import { AddSvg } from "../../../../SVG/AddSvg";
 import { useStore } from "effector-react";
-import { $storeTimer, ITimer, changeIsModeWork, changeWorkTime, endCycle, initCurSec, tick } from "../../../../effector/timer";
+import { $storeTimer, ITimer, changeIsModeWork, changeWorkTime, endCycle, initCurSec, setLongRest, tick } from "../../../../effector/timer";
 import { $TaskList, completeTomato } from "../../../../effector/taskList";
 import classNames from "classnames";
 import { $history, addPauseTime, addTomatos, addWorkTime, getNow } from "../../../../effector/history";
@@ -26,10 +26,14 @@ function secToMin(sec:number)  :string {
 export function Clock({taskId}:Clock){
     const timer = useStore($storeTimer);
     const taskList = useStore($TaskList);
+    let task = taskList.list.filter((task=>{
+        return task.key === taskId
+    }))[0];
+    let completeTomatos = task?.completeTomatos?task.completeTomatos: 0;
+    let nextTomato = useRef(completeTomatos);
     const history = useStore($history);
     const OFFSET = 60;
     let time = secToMin(timer.curSec);
-    let left = useRef(0);
 
    
     function handleTick(){
@@ -45,7 +49,6 @@ export function Clock({taskId}:Clock){
                 
 
             }
-            console.log(history.days);
             
 
         }
@@ -58,7 +61,11 @@ export function Clock({taskId}:Clock){
             if(timer.curSec <=0){
                 if(timer.isModeWork){
                     changeIsModeWork(!timer.isModeWork);
+                    nextTomato.current += 1;
                     completeTomato(taskId);
+                    if(completeTomatos%4 === 0){
+                        setLongRest()
+                    }
                     addTomatos(getNow());
 
                 }else{
